@@ -25,7 +25,7 @@ class TestCurbCurlMulti < Test::Unit::TestCase
     m.add( c2 )
 
     m.perform
-    
+
     assert_match(/^# DO NOT REMOVE THIS COMMENT/, d1)
     assert_match(/^# DO NOT REMOVE THIS COMMENT/, d2)
 
@@ -49,7 +49,7 @@ class TestCurbCurlMulti < Test::Unit::TestCase
 
     assert_match(/^# DO NOT REMOVE THIS COMMENT/, c1.body_str)
     assert_match(/^# DO NOT REMOVE THIS COMMENT/, c2.body_str)
-    
+
     m = nil
 
   end
@@ -72,7 +72,7 @@ class TestCurbCurlMulti < Test::Unit::TestCase
     n.times do|i|
       assert_match(/^# DO NOT REMOVE THIS COMMENT/, responses[i], "response #{i}")
     end
-    
+
     m = nil
   end
 
@@ -97,7 +97,7 @@ class TestCurbCurlMulti < Test::Unit::TestCase
         assert_match(/^# DO NOT REMOVE THIS COMMENT/, responses[i], "response #{i}")
       end
     end
-    
+
     m = nil
 
   end
@@ -107,7 +107,7 @@ class TestCurbCurlMulti < Test::Unit::TestCase
     c2 = Curl::Easy.new($TEST_URL)
     success_called1 = false
     success_called2 = false
- 
+
     c1.on_success do|c|
       success_called1 = true
       assert_match(/^# DO NOT REMOVE THIS COMMENT/, c.body_str)
@@ -130,16 +130,16 @@ class TestCurbCurlMulti < Test::Unit::TestCase
 
     assert success_called2
     assert success_called1
- 
+
     m = nil
   end
-  
+
   def test_with_success_cb_with_404
     c1 = Curl::Easy.new("#{$TEST_URL.gsub(/file:\/\//,'')}/not_here")
     c2 = Curl::Easy.new($TEST_URL)
     success_called1 = false
     success_called2 = false
-    
+
     c1.on_success do|c|
       success_called1 = true
       #puts "success 1 called: #{c.body_str.inspect}"
@@ -151,7 +151,7 @@ class TestCurbCurlMulti < Test::Unit::TestCase
     end
 
     c2.on_success do|c|
-    #  puts "success 2 called: #{c.body_str.inspect}"
+      #  puts "success 2 called: #{c.body_str.inspect}"
       success_called2 = true
       assert_match(/^# DO NOT REMOVE THIS COMMENT/, c.body_str)
     end
@@ -170,7 +170,7 @@ class TestCurbCurlMulti < Test::Unit::TestCase
 
     assert success_called2
     assert !success_called1
- 
+
     m = nil
   end
 
@@ -197,9 +197,9 @@ class TestCurbCurlMulti < Test::Unit::TestCase
     end
 
     def self.test
-        ObjectSpace.garbage_collect
+      ObjectSpace.garbage_collect
       tfs = TestForScope.new
-        ObjectSpace.garbage_collect
+      ObjectSpace.garbage_collect
       tfs.t_method
       ObjectSpace.garbage_collect
       tfs.t_call

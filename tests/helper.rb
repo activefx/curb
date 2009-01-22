@@ -57,10 +57,6 @@ class TestServlet < WEBrick::HTTPServlet::AbstractServlet
   end
 
   def do_GET(req,res)
-    if req.path == "/methods/head"
-      res['Location'] = "http://www.redirect.com"
-    end
-    
     respond_with(:GET,req,res)
   end
 
@@ -74,6 +70,11 @@ class TestServlet < WEBrick::HTTPServlet::AbstractServlet
 
   def do_DELETE(req,res)
     respond_with(:DELETE,req,res)
+  end
+
+  def do_HEAD(req,res)
+    res['Location'] = "/nonexistent"
+    respond_with(:HEAD, req, res)
   end
 
 end
